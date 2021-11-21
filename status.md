@@ -2,15 +2,15 @@
 
 #### Your name
 
-TODO
+Timothy Khumpan, Alex Li
 
 #### Your section leader's name
 
-TODO
+Joanne Nichols, Zhenyu Zhao
 
 #### Project title
 
-TODO
+Woof Bot
 
 ***
 
@@ -18,12 +18,12 @@ Short answers for the below questions suffice. If you want to alter your plan fo
 
 #### What have you done for your project so far?
 
-TODO
+Created a simple discord bot, make it appear online and created a list of commands it can peform. (Running gifs, displaying links and showing list of possible commands.)
 
 #### What have you not done for your project yet?
 
-TODO
+We haven't figure out how to get the exact live price of the cyptobot.
 
 #### What problems, if any, have you encountered?
 
-TODO
+Certificate errors (for mac), getting bot to run. 
