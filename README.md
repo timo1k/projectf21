@@ -6,7 +6,8 @@
 ### These were used to help navigate the api with python and get the specific data we needed
 ## https://realpython.com/how-to-make-a-discord-bot-python/ https://www.youtube.com/watch?v=SPTfmiYiuok https://uptimerobot.com/dashboard#789894739 https://replit.com/@timo1k/UnsungFearlessCleaninstall#main.py 
 ### These were used to help get the bot up and running 24/7
-
+## https://discordpy.readthedocs.io/en/stable/api.html
+### used for overall help, like how to create embed messages
 
 # CHALLENGES!!!
 ## We didn't get to execute our original idea, which is having the live data being displayed on the dashboard of the bot so we dont have to keep on typing "$live," we focused on first being able to grab the data from the api, which was hard to work with  as we have never done that before. We had a problem where we would call to the api too much (more than the free plan was), which turned out to be that the bot was running the script to grap the data all the time so we created fuctions that would only call to the api when needed.
