@@ -1,18 +1,18 @@
-#cryptoDataBot
-##Needed:
-###Discord Bot Token (*insert discord token*), and a api key to CoinMarketCap (*insert api key*)
-##functionality
-###View the live price (or data like marketcap) of BTC ETH SOL within a group on discord through a bot. Also more features like displaying the live price of any of the crypto assets we choose will be displayed on discord side bar (under the discord bot's name).
-###def getETHprice():
+# cryptoDataBot
+## Needed:
+### Discord Bot Token (*insert discord token*), and a api key to CoinMarketCap (*insert api key*)
+## functionality
+### View the live price (or data like marketcap) of BTC ETH SOL within a group on discord through a bot. Also more features like displaying the live price of any of the crypto assets we choose will be displayed on discord side bar (under the discord bot's name).
+### def getETHprice():
 
-###def getETHmkc():
+### def getETHmkc():
 
-###def getETHrank():
+### def getETHrank():
 
-##cool functionality:
-###@tasks.loop(seconds = 600)
-async def updatewoof():
-  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=("PRICE $"+getETHprice())))
+## cool functionality:
+### @tasks.loop(seconds = 600)
+### async def updatewoof():
+###  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=("PRICE $"+getETHprice())))
   
 
 
