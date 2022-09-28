@@ -15,7 +15,7 @@
 ###  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=("PRICE $"+getETHprice())))
   
 
-
+#### last update: 9/28/22
 # tools used:
 ## https://www.youtube.com/watch?v=t75nMHEuU2I https://www.youtube.com/watch?v=Wd26AIfgTpA https://www.geeksforgeeks.org/convert-json-to-dictionary-in-python/ https://jsonformatter.curiousconcept.com/# https://coinmarketcap.com/api/documentation/v1/#section/Introduction
 ### These were used to help navigate the api with python and get the specific data we needed
