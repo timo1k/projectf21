@@ -2,23 +2,24 @@ import discord
 
 from requests import Session
 import json
-
+from discord.ext import tasks
 
 
 
 from keep_alive import keep_alive 
 
+
 client = discord.Client()
 #call to the api of coinmarket cap to get the data
-
-def getwoofdata():
+#dont need botoom func 
+def getETHdata():
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
     parameters = {
-    'symbol':'WOOF',
+    'symbol':'ETH',
     }
     headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': 'c1b04b2e-baf0-4989-9118-6ccd8ae1e8a6',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY 
     }
 
     session = Session()
@@ -28,14 +29,14 @@ def getwoofdata():
     data = json.loads(response.text)
     return data 
 
-def getwoofprice():
+def getETHprice():
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
     parameters = {
-    'symbol':'WOOF',
+    'symbol':'ETH',
     }
     headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': 'c1b04b2e-baf0-4989-9118-6ccd8ae1e8a6',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY 
     }
 
     session = Session()
@@ -44,17 +45,38 @@ def getwoofprice():
     response = session.get(url, params=parameters)
     data = json.loads(response.text)
 
-    active_price = data["data"]["WOOF"]["quote"]["USD"]["price"]
+    active_price = data["data"]["ETH"]["quote"]["USD"]["price"]
+    active_price = "{0:.2f}".format(active_price)
+    return str(active_price)
+  
+def getsolprice():
+    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+    parameters = {
+    'symbol':'SOL',
+    }
+    headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY 
+    }
+
+    session = Session()
+    session.headers.update(headers)
+    
+    response = session.get(url, params=parameters)
+    data = json.loads(response.text)
+
+    active_price = data["data"]["SOL"]["quote"]["USD"]["price"]
+    active_price = "{0:.2f}".format(active_price)
     return str(active_price)
 
-def getwoofmkc():
+def getETHmkc():
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
     parameters = {
-    'symbol':'WOOF',
+    'symbol':'ETH',
     }
     headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': 'c1b04b2e-baf0-4989-9118-6ccd8ae1e8a6',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY 
     }
 
     session = Session()
@@ -63,17 +85,36 @@ def getwoofmkc():
     response = session.get(url, params=parameters)
     data = json.loads(response.text)
 
-    mkc = data["data"]["WOOF"]["quote"]["USD"]["market_cap"]
+    mkc = data["data"]["ETH"]["quote"]["USD"]["market_cap"]
+    return str(mkc)
+  
+def getsolmkc():
+    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+    parameters = {
+    'symbol':'SOL',
+    }
+    headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY  
+    }
+
+    session = Session()
+    session.headers.update(headers)
+    
+    response = session.get(url, params=parameters)
+    data = json.loads(response.text)
+
+    mkc = data["data"]["SOL"]["quote"]["USD"]["market_cap"]
     return str(mkc)
 
-def getwoofrank():
+def getETHrank():
     url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
     parameters = {
-    'symbol':'WOOF',
+    'symbol':'ETH',
     }
     headers = {
     'Accepts': 'application/json',
-    'X-CMC_PRO_API_KEY': 'c1b04b2e-baf0-4989-9118-6ccd8ae1e8a6',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY  
     }
 
     session = Session()
@@ -82,13 +123,37 @@ def getwoofrank():
     response = session.get(url, params=parameters)
     data = json.loads(response.text)
 
-    rank = data["data"]["WOOF"]["cmc_rank"]
+    rank = data["data"]["ETH"]["cmc_rank"]
+    return str(rank)
+
+def getsolrank():
+    url = 'https://pro-api.coinmarketcap.com/v1/cryptocurrency/quotes/latest'
+    parameters = {
+    'symbol':'SOL',
+    }
+    headers = {
+    'Accepts': 'application/json',
+    'X-CMC_PRO_API_KEY': '', #insert your own api KEY 
+    }
+
+    session = Session()
+    session.headers.update(headers)
+    
+    response = session.get(url, params=parameters)
+    data = json.loads(response.text)
+
+    rank = data["data"]["SOL"]["cmc_rank"]
     return str(rank)
 
 #tells if bot is live on the terminal
 @client.event
 async def on_ready():
-    print('We have logged in as {0.user}'.format(client))
+  updateBot.start()
+  print('We have logged in as {0.user}'.format(client))
+@tasks.loop(seconds = 600)
+
+async def updateBot():
+  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=("PRICE $"+getETHprice())))
 
 #if statements to check the user inputs
 @client.event
@@ -98,27 +163,26 @@ async def on_message(message):
         return
     
     if message.content.startswith('$help'):
-        await message.channel.send('Commands:\n$woof\n$live\n$freewoof')
+        await message.channel.send('Commands:\n$ETH\n$priceETH\n$priceSOL')
         
-    if message.content.startswith('$woof'):
-        await message.channel.send('https://coinmarketcap.com/currencies/woof/') 
+    if message.content.startswith('$ETH'):
+        await message.channel.send('https://coinmarketcap.com/currencies/ethereum/') 
     #embed data which displays coins market cp and live price etc...
     
-    if message.content.startswith('$live'):
-        embedVar = discord.Embed(title="LIVE PRICE", description= ("$"+getwoofprice()), color=0x9797FF)
-        embedVar.add_field(name="Marketcap", value=("$"+getwoofmkc()), inline=True)
-        embedVar.add_field(name="Rank", value=getwoofrank(), inline=True)
+    if message.content.startswith('$priceETH'):
+        embedVar = discord.Embed(title="LIVE PRICE: (ETH)", description= ("$"+(getETHprice())), color=0x9797FF)
+        embedVar.add_field(name="Marketcap", value=("$"+getETHmkc()), inline=True)
+        embedVar.add_field(name="Rank", value=getETHrank(), inline=True)
+        embedVar.set_footer(text="Data From CoinMarketCap")
+        await message.channel.send(embed=embedVar)
+      
+    if message.content.startswith('$priceSOL'):
+        embedVar = discord.Embed(title="LIVE PRICE: (SOL)", description= ("$"+(getsolprice())), color=0x9797FF)
+        embedVar.add_field(name="Marketcap", value=("$"+getsolmkc()), inline=True)
+        embedVar.add_field(name="Rank", value=getsolrank(), inline=True)
         embedVar.set_footer(text="Data From CoinMarketCap")
         await message.channel.send(embed=embedVar)
 
-    if message.content.startswith('$freewoof'):
-        await message.channel.send('https://media.giphy.com/media/Ju7l5y9osyymQ/giphy.gif')
-
-
-
-
-
-
       
 keep_alive()
-client.run('OTExNDc4NTQ2MTMwNjg1OTgz.YZh-iw.rKoyRGoAtHDvS1rfANiVKG8I34Y')
+client.run('') #insert your own discord bot token
