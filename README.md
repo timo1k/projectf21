@@ -9,17 +9,10 @@
 
 ### def getETHrank():
 
-## cool functionality:
-### @tasks.loop(seconds = 600)
+## newest update: cool functionality:
 ### async def updatewoof():
 ###  await client.change_presence(activity=discord.Activity(type=discord.ActivityType.watching, name=("PRICE $"+getETHprice())))
-  
+#### updates the discord bot status to show the live price of ETH without any user commands (every 600 seconds to not get rate limited)
 
-#### last update: 9/28/22
-# tools used:
-## https://www.youtube.com/watch?v=t75nMHEuU2I https://www.youtube.com/watch?v=Wd26AIfgTpA https://www.geeksforgeeks.org/convert-json-to-dictionary-in-python/ https://jsonformatter.curiousconcept.com/# https://coinmarketcap.com/api/documentation/v1/#section/Introduction
-### These were used to help navigate the api with python and get the specific data we needed
-## https://realpython.com/how-to-make-a-discord-bot-python/ https://www.youtube.com/watch?v=SPTfmiYiuok https://uptimerobot.com/dashboard#789894739 https://replit.com/@timo1k/UnsungFearlessCleaninstall#main.py 
-### These were used to help get the bot up and running 24/7
-## https://discordpy.readthedocs.io/en/stable/api.html
-### used for overall help, like how to create embed messages
+#### last update: 9/29/22
+
